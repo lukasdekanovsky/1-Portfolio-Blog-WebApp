@@ -1,0 +1,140 @@
+/*--------------- ELEMENTS -------------------------------*/
+body {
+    background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(
+        650px circle at 0% 0%, 
+        hsl(218, 41%, 35%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%, transparent 100%
+        ),
+        radial-gradient(
+        1250px circle at 100% 100%, 
+        hsl(218, 41%, 45%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%, transparent 100%
+        );
+    
+}
+
+#card-custom {
+    width: 350px;
+    height: 500px;
+    background: hsla(0, 0%, 100%, 0.15);
+    backdrop-filter: blur(30px);
+}
+
+#shape-1 {
+    border-radius: 85% 15% 65% 35% / 39% 22% 78% 61%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(rgb(39, 95, 105), rgb(1, 238, 251));
+    bottom: -220px;
+    left: -150px;
+    z-index: -10;
+}
+
+#shape-2 {
+    border-radius: 30% 70% 21% 79% / 49% 79% 21% 51%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(rgb(1, 132, 246), rgb(114, 178, 234));
+    bottom: 350px;
+    left: 90px;
+    z-index: -10;
+}
+
+#shape-3 {
+    border-radius: 38% 62% 54% 46% / 45% 52% 48% 55%;
+    height: 220px;
+    width: 220px;
+    background: radial-gradient(rgb(159, 159, 127), yellow);
+    bottom: 150px;
+    left: 320px;
+    z-index: -10;
+}
+
+/*--------------- ANIMATIONS -------------------------------*/
+.fade {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    padding: auto;
+    animation-name: fade-in;
+}
+
+.fade-delay-small {
+    animation-delay: 0.15s;
+}
+.fade-delay-medium {
+    animation-delay: 0.3s;
+}
+.fade-delay-big {
+    animation-delay: 0.4s;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    to {
+        opacity: 100;
+    }
+}
+
+/*--------------- TEXT - BUTTONS CLASES-------------------------------*/
+
+.main-description {
+    font-family: Georgia, serif;
+}
+
+.card-description {
+    font-weight: lighter;
+    color: white;
+}
+
+.button_a {
+    color: rgb(0, 0, 0); 
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-right: 10px;
+    font-size: 16px; 
+    line-height: 15px; 
+    padding: 15px; 
+    border-radius: 20px; 
+    font-family: Georgia, serif;
+    font-weight: normal; 
+    text-decoration: none; 
+    font-style: normal; 
+    font-variant: normal; 
+    text-transform: none; 
+    display: inline-block;
+}
+
+.button_a:hover {
+    background-color: hsl(0, 0%, 100%);
+}
+
+.button_b {
+    color: rgb(255, 255, 255); 
+    background-color: rgba(255, 255, 255, 0);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    margin-right: 10px;
+    font-size: 16px; 
+    line-height: 15px; 
+    padding: 15px; 
+    border-radius: 20px; 
+    font-family: Georgia, serif;
+    font-weight: normal; 
+    text-decoration: none; 
+    font-style: normal; 
+    font-variant: normal; 
+    text-transform: none; 
+    display: inline-block;
+}
+
+.button_b:hover {
+    background-color: hsl(218, 41%, 25%);
+    border: 3px solid rgba(255, 255, 255, 1);
+}
+
+/*----------------------------------------------*/
