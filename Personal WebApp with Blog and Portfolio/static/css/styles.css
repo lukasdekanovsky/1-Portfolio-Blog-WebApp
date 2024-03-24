@@ -1,6 +1,6 @@
 /*--------------- ELEMENTS -------------------------------*/
-body {
-    background-color: hsl(218, 41%, 15%);
+.main-page-background-gradient {
+    background-color:hsl(218, 41%, 15%);
     background-image: radial-gradient(
         650px circle at 0% 0%, 
         hsl(218, 41%, 35%) 15%,
@@ -15,7 +15,10 @@ body {
         hsl(218, 41%, 20%) 75%,
         hsl(218, 41%, 19%) 80%, transparent 100%
         );
-    
+}
+
+.base-gradient {
+    background-color:hsl(218, 41%, 15%);
 }
 
 #card-custom {
@@ -137,4 +140,4 @@ body {
     border: 3px solid rgba(255, 255, 255, 1);
 }
 
-/*----------------------------------------------*/
+/*--------------------- HEADER -------------------------*/
