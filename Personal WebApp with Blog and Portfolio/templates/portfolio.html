@@ -12,19 +12,13 @@
     <div class="header fade fade-delay-small">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8 col-md-8 col-sm-4 mt-3 mx-5">
+                <div class="col-lg-2 col-md-2 col-sm-2 mt-3 mx-5" align="left">
                     <a href="{{ url_for('add_portfolio')}}" class="button_d" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                         <span style="font-weight: bold;">New project</span> 
                     </a>
                 </div>
 
-                <div class="col-lg-3 col-md-3 col-sm-8 mt-3" align="center">
-                    <a href="{{ url_for('home')}}" class="button_c" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
-                        <span style="font-weight: bold;">Register</span> 
-                    </a>
-                    <a href="{{ url_for('home')}}" class="button_c" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
-                        <span style="font-weight: bold;">Login</span> 
-                    </a>
+                <div class="col-lg-9 col-md-8 col-sm-8 mt-3 mb-3" align="right">
                     <a href="{{ url_for('home')}}" class="button_c mx-5" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                         <span style="font-weight: bold;">Homepage</span> 
                     </a>
@@ -54,7 +48,6 @@
                             {{ project.description }}
                             </p>
                 
-                            <a href="#" class="button_d">Coments</a>
                             <a href="{{ url_for('edit_portfolio', id = project.id)}}" class="button_d">Edit</a>
                             <a href="{{ url_for('delete_portfolio', id = project.id)}}" class="button_e">Delete</a><br>
                             <a href="{{ project.gitlink }}" class="">

@@ -11,6 +11,8 @@ from werkzeug.utils import secure_filename
 import requests
 import os
 
+from form import AddProject, EditProject
+
 
 app = Flask(__name__)
 app.secret_key = "238JRjhgdg838#sk097kdKTTR5532948UJDZhhduzeůí9?"
@@ -22,6 +24,7 @@ class Base(DeclarativeBase):
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///new-books-collection.db"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
+
 
 # ----------DATABASE TABLE CREATION ----------------------------------------
 class Project(db.Model):
@@ -40,31 +43,7 @@ class Project(db.Model):
 with app.app_context():
     db.create_all()
 
-# ------------- FORMS ---------------------------------------------------
-# 1) Add new project form
-class AddProject(FlaskForm):
-    intro_title = StringField(label="Enter the main project title", validators=[validators.DataRequired()])
-    title = StringField(label="Project subtitle", validators=[validators.DataRequired()])
-    version = StringField(label="Project version", validators=[validators.DataRequired()])
-    technologies = StringField(label="Which key technologies are in this project?", validators=[validators.DataRequired()])
-    description = StringField(label="Project description", validators=[validators.DataRequired()])
-    image = FileField(label="Upload project image")
-    gitlink = URLField(label="Enter github repo link", validators=[validators.DataRequired()])
-    submit = SubmitField(label="Submit new project")
-
-class EditProject(FlaskForm):
-    new_intro_title = StringField(label="Enter the main project title")
-    new_title = StringField(label="Project subtitle")
-    new_version = StringField(label="Project version")
-    new_technologies = StringField(label="Which key technologies are in this project?")
-    new_description = StringField(label="Project description")
-    new_image = FileField(label="Upload project image")
-    new_gitlink = URLField(label="Enter github repo link")
-    submit = SubmitField(label="Submit changes")
-
-
-
-# ----------------------------- URL ------------------------------------
+# -----------------------------PORTFOLIO URL ------------------------------------
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -161,6 +140,13 @@ def delete_portfolio():
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
+
+# -----------------------------BLOG URL ------------------------------------
+@app.route("/blog")
+def blog():
+    return render_template("blog.html")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
