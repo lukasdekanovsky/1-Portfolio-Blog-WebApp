@@ -388,4 +388,4 @@ def delete_comment(comment_id, post_id):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
