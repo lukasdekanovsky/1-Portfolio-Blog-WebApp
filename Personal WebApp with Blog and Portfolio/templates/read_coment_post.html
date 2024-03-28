@@ -34,55 +34,95 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="19px" class="ionicon" viewBox="0 0 512 512"><path d="M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M288 336l80-80-80-80M80 256h272"/></svg>
                             <span style="font-weight: bold;">Log out</span> 
                         </a>
-                        <a href="{{ url_for('home')}}" class="button_c mx-5" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25px" class="ionicon" viewBox="0 0 512 512"><path d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
-                            <span style="font-weight: bold;">Homepage</span> 
+                        <a href="{{ url_for('blog')}}" class="button_c mx-5" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
+                            <span style="font-weight: bold;">Back</span> 
                         </a>
                     </div>
                     
                 </div>
             </div>
         </div>
-
-    <!-----------Blog content----------------------------------------------------->
-        
-        {% for post in blog_posts %}
-        <div class="blog my-2">
+        <!-----------READ AND COMENT SECTION----------------------------------------------------->
+        <!--SELECTED POST TO COMMENT-->
+        <div class="blog">
             <div class="position-relative">
                 {% if current_user.id == 1: %}
-                <a href="{{url_for('delete_post', post_id=post.id) }}" class="button_delete position-absolute" style="width: auto;" title="Delete post">
-                    Delete
+                <a href="{{url_for('edit_post', post_id=post.id) }}" class="button_edit position-absolute" style="width: auto;" title="Edit post">
+                    Edit post
                 </a>
                 {% endif %}
             </div>
+            
+        
             <div class="post-box">
                 
                 <div class="post-header justify-content-center">
                     <h1 class="post-text-title">{{post.title}}</h1>
                     <h2 class="post-text-subtitle">{{post.subtitle}}</h2>
-                    <h3 class="post-text-author">Author: {{post.author.name}}</h2>
+                    <h3 class="post-text-author">{{post.author.name}}</h2>
                 </div>
-        
+                <div class="post-body justify-content-center">
+                    <p class="post-text-body">
+                        {{post.body}}
+                    </p>
+                </div>
                 <div class="post-body-image">
                     <img class="post-image my-2" src="{{post.img_url}}" alt="" width="50%" style="border-radius: 10px;">
                 </div>
-
-                <div class="post-footer">
-                    <a href="{{ url_for('read_post', post_id=post.id) }}" class="button_read">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 262.62L256 342l80-79.38M256 330.97V170"/><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
-                        <p>
-                            Read & <br>comment
-                        </p>
-                    </a>
-                </div>
-
                 <div class="post-footer">
                     <h1 class="post-date">{{post.date}}</h1>
                 </div>
-
             </div>
         </div>
-        {% endfor %}
+
+        <div class="comment-box my-3">
+            <div class="post-header justify-content-center">
+                <h1 style="color: white; font-size: 15px; text-align: center; font-weight: bold;">Write a comment</h1>
+            </div>
+            <div class="post-header justify-content-center">
+                <!--COMENT FORM-->
+                {% from "bootstrap5/form.html" import render_form %}
+                <!-- Load the CKEditor -->
+                {{ ckeditor.load(pkg_type="basic") }}
+                <!-- Configure it with the name of the form field from CommentForm -->
+                {{ ckeditor.config(name='comment_text') }}
+                <!-- Create the wtf quick form from CommentForm -->
+                {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+            </div>
+        </div>
+        <!--LOOP ALL THE COMENTS-->
+        <div class="comment-list">
+            <ul class="commentList">
+            <!-- Show all comments -->
+                {% for comment in post.comments: %}
+                <li>
+                    <div class="commenterImage">
+                    <img
+                        src="{{ comment.comment_author.email | gravatar }}"
+                    />
+                    </div>
+                    <div class="commentText">
+                        <p>
+                            {{comment.text|safe}}
+
+                            <span style="font-size: 12px;">commented by:</span>
+                            <span class="sub-text" style="font-weight: bold;">{{comment.comment_author.name}}</span>
+                            
+                            {% if current_user.id == 1: %}
+                                <a href="{{url_for('delete_comment',comment_id = comment.id, post_id=post.id) }}" class="button_comment_delete" style="width: auto;" title="Delete post">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="ionicon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
+                                </a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="empty">
+
+        </div>
+
     </div>
 </body>
 </html>
