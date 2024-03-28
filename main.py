@@ -49,7 +49,7 @@ gravatar = Gravatar(app,
 # ---------- DATABASE CREATION -------------------------------------
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///personal-webpage.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///personal-webpage.db")
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
