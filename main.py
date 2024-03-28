@@ -15,6 +15,7 @@ from flask_gravatar import Gravatar
 from functools import wraps
 import requests
 import os
+import psycopg2
 from datetime import date
 
 from form import AddProject, EditProject, RegisterForm, LoginForm, CreatePostForm, CommentForm
