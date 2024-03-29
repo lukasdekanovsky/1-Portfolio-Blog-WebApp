@@ -13,7 +13,7 @@
         <div class="header fade fade-delay-small">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-2 mt-3 mx-5" align="left">
+                    <div class="col-sm-3 justify-content-center my-2" align="left">
                         <a href="{{ url_for('register')}}" class="button_d" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                             <span style="font-weight: bold;">Register</span> 
                         </a>
@@ -25,7 +25,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-lg-9 col-md-8 col-sm-8 mt-3 mb-3" align="right">
+                    <div class="col-sm-9 justify-content-center" align="right">
                         <a href="{{ url_for('login')}}" class="button_c" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="19px" class="ionicon" viewBox="0 0 512 512"><path d="M218.1 167.17c0 13 0 25.6 4.1 37.4-43.1 50.6-156.9 184.3-167.5 194.5a20.17 20.17 0 00-6.7 15c0 8.5 5.2 16.7 9.6 21.3 6.6 6.9 34.8 33 40 28 15.4-15 18.5-19 24.8-25.2 9.5-9.3-1-28.3 2.3-36s6.8-9.2 12.5-10.4 15.8 2.9 23.7 3c8.3.1 12.8-3.4 19-9.2 5-4.6 8.6-8.9 8.7-15.6.2-9-12.8-20.9-3.1-30.4s23.7 6.2 34 5 22.8-15.5 24.1-21.6-11.7-21.8-9.7-30.7c.7-3 6.8-10 11.4-11s25 6.9 29.6 5.9c5.6-1.2 12.1-7.1 17.4-10.4 15.5 6.7 29.6 9.4 47.7 9.4 68.5 0 124-53.4 124-119.2S408.5 48 340 48s-121.9 53.37-121.9 119.17zM400 144a32 32 0 11-32-32 32 32 0 0132 32z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/></svg>
                             <span style="font-weight: bold;">Login</span> 
@@ -44,85 +44,89 @@
         </div>
         <!-----------READ AND COMENT SECTION----------------------------------------------------->
         <!--SELECTED POST TO COMMENT-->
-        <div class="blog">
-            <div class="position-relative">
-                {% if current_user.id == 1: %}
-                <a href="{{url_for('edit_post', post_id=post.id) }}" class="button_edit position-absolute" style="width: auto;" title="Edit post">
-                    Edit post
-                </a>
-                {% endif %}
-            </div>
-            
-        
-            <div class="post-box">
-                
-                <div class="post-header justify-content-center">
-                    <h1 class="post-text-title">{{post.title}}</h1>
-                    <h2 class="post-text-subtitle">{{post.subtitle}}</h2>
-                    <h3 class="post-text-author">{{post.author.name}}</h2>
-                </div>
-                <div class="post-body justify-content-center">
-                    <p class="post-text-body">
-                        {{post.body}}
-                    </p>
-                </div>
-                <div class="post-body-image">
-                    <img class="post-image my-2" src="{{post.img_url}}" alt="" width="50%" style="border-radius: 10px;">
-                </div>
-                <div class="post-footer">
-                    <h1 class="post-date">{{post.date}}</h1>
-                </div>
-            </div>
-        </div>
+        <div class="container fade fade-delay-big">
+            <div class="row">
+                <div class="">
+                    
+                    
+                    <div class="post-box">
 
-        <div class="comment-box my-3">
-            <div class="post-header justify-content-center">
-                <h1 style="color: white; font-size: 15px; text-align: center; font-weight: bold;">Write a comment</h1>
-            </div>
-            <div class="post-header justify-content-center">
-                <!--COMENT FORM-->
-                {% from "bootstrap5/form.html" import render_form %}
-                <!-- Load the CKEditor -->
-                {{ ckeditor.load(pkg_type="basic") }}
-                <!-- Configure it with the name of the form field from CommentForm -->
-                {{ ckeditor.config(name='comment_text') }}
-                <!-- Create the wtf quick form from CommentForm -->
-                {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
-            </div>
-        </div>
-        <!--LOOP ALL THE COMENTS-->
-        <div class="comment-list">
-            <ul class="commentList">
-            <!-- Show all comments -->
-                {% for comment in post.comments: %}
-                <li>
-                    <div class="commenterImage">
-                    <img
-                        src="{{ comment.comment_author.email | gravatar }}"
-                    />
-                    </div>
-                    <div class="commentText">
-                        <p>
-                            {{comment.text|safe}}
-
-                            <span style="font-size: 12px;">commented by:</span>
-                            <span class="sub-text" style="font-weight: bold;">{{comment.comment_author.name}}</span>
-                            
+                        <div class="position-relative">
                             {% if current_user.id == 1: %}
-                                <a href="{{url_for('delete_comment',comment_id = comment.id, post_id=post.id) }}" class="button_comment_delete" style="width: auto;" title="Delete post">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="ionicon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
-                                </a>
+                            <a href="{{url_for('edit_post', post_id=post.id) }}" class="button_edit position-absolute" style="width: auto;" title="Edit post">
+                                Edit post
+                            </a>
                             {% endif %}
-                        </p>
+                        </div>
+                        
+                        <div class="post-header justify-content-center">
+                            <h1 class="post-text-title">{{post.title}}</h1>
+                            <h2 class="post-text-subtitle">{{post.subtitle}}</h2>
+                            <h3 class="post-text-author">{{post.author.name}}</h2>
+                        </div>
+                        <div class="post-body justify-content-center">
+                            <p class="post-text-body">
+                                {{post.body}}
+                            </p>
+                        </div>
+                        <div class="post-body-image">
+                            <img class="post-image my-2" src="{{post.img_url}}" alt="" width="50%" style="border-radius: 10px;">
+                        </div>
+                        <div class="post-footer">
+                            <h1 class="post-date">{{post.date}}</h1>
+                        </div>
                     </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="empty">
+                </div>
 
-        </div>
+                <div class="comment-box my-3">
+                    <div class="post-header justify-content-center">
+                        <h1 style="color: white; font-size: 15px; text-align: center; font-weight: bold;">Write a comment</h1>
+                    </div>
+                    <div class="post-header justify-content-center">
+                        <!--COMENT FORM-->
+                        {% from "bootstrap5/form.html" import render_form %}
+                        <!-- Load the CKEditor -->
+                        {{ ckeditor.load(pkg_type="basic") }}
+                        <!-- Configure it with the name of the form field from CommentForm -->
+                        {{ ckeditor.config(name='comment_text') }}
+                        <!-- Create the wtf quick form from CommentForm -->
+                        {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+                    </div>
+                </div>
+                <!--LOOP ALL THE COMENTS-->
+                <div class="comment-list">
+                    <ul class="commentList">
+                    <!-- Show all comments -->
+                        {% for comment in post.comments: %}
+                        <li>
+                            <div class="commenterImage">
+                            <img
+                                src="{{ comment.comment_author.email | gravatar }}"
+                            />
+                            </div>
+                            <div class="commentText">
+                                <p>
+                                    {{comment.text|safe}}
 
+                                    <span style="font-size: 12px;">commented by:</span>
+                                    <span class="sub-text" style="font-weight: bold;">{{comment.comment_author.name}}</span>
+                                    
+                                    {% if current_user.id == 1: %}
+                                        <a href="{{url_for('delete_comment',comment_id = comment.id, post_id=post.id) }}" class="button_comment_delete" style="width: auto;" title="Delete post">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="ionicon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
+                                        </a>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                    <div class="empty">
+
+                    </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

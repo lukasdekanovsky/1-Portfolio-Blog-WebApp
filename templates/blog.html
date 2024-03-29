@@ -13,7 +13,7 @@
         <div class="header fade fade-delay-small">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-2 col-md-2 col-sm-2 mt-3 mx-5" align="left">
+                    <div class="col-sm-3 justify-content-center my-2" align="left" align-sm="center">
                         <a href="{{ url_for('register')}}" class="button_d" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                             <span style="font-weight: bold;">Register</span> 
                         </a>
@@ -25,7 +25,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-lg-9 col-md-8 col-sm-8 mt-3 mb-3" align="right">
+                    <div class="col-sm-9 justify-content-center" align="right">
                         <a href="{{ url_for('login')}}" class="button_c" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="19px" class="ionicon" viewBox="0 0 512 512"><path d="M218.1 167.17c0 13 0 25.6 4.1 37.4-43.1 50.6-156.9 184.3-167.5 194.5a20.17 20.17 0 00-6.7 15c0 8.5 5.2 16.7 9.6 21.3 6.6 6.9 34.8 33 40 28 15.4-15 18.5-19 24.8-25.2 9.5-9.3-1-28.3 2.3-36s6.8-9.2 12.5-10.4 15.8 2.9 23.7 3c8.3.1 12.8-3.4 19-9.2 5-4.6 8.6-8.9 8.7-15.6.2-9-12.8-20.9-3.1-30.4s23.7 6.2 34 5 22.8-15.5 24.1-21.6-11.7-21.8-9.7-30.7c.7-3 6.8-10 11.4-11s25 6.9 29.6 5.9c5.6-1.2 12.1-7.1 17.4-10.4 15.5 6.7 29.6 9.4 47.7 9.4 68.5 0 124-53.4 124-119.2S408.5 48 340 48s-121.9 53.37-121.9 119.17zM400 144a32 32 0 11-32-32 32 32 0 0132 32z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/></svg>
                             <span style="font-weight: bold;">Login</span> 
@@ -34,7 +34,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="19px" class="ionicon" viewBox="0 0 512 512"><path d="M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M288 336l80-80-80-80M80 256h272"/></svg>
                             <span style="font-weight: bold;">Log out</span> 
                         </a>
-                        <a href="{{ url_for('home')}}" class="button_c mx-5" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
+                        <a href="{{ url_for('home')}}" class="button_c" role="button" data-ripple-color="hsl(218, 41%, 45%)"> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="25px" class="ionicon" viewBox="0 0 512 512"><path d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
                             <span style="font-weight: bold;">Homepage</span> 
                         </a>
@@ -45,44 +45,53 @@
         </div>
 
     <!-----------Blog content----------------------------------------------------->
-        
-        {% for post in blog_posts %}
-        <div class="blog my-2">
-            <div class="position-relative">
-                {% if current_user.id == 1: %}
-                <a href="{{url_for('delete_post', post_id=post.id) }}" class="button_delete position-absolute" style="width: auto;" title="Delete post">
-                    Delete
-                </a>
-                {% endif %}
-            </div>
-            <div class="post-box">
+        <div class="container fade fade-delay-big">
+            <div class="row">
                 
-                <div class="post-header justify-content-center">
-                    <h1 class="post-text-title">{{post.title}}</h1>
-                    <h2 class="post-text-subtitle">{{post.subtitle}}</h2>
-                    <h3 class="post-text-author">Author: {{post.author.name}}</h2>
-                </div>
-        
-                <div class="post-body-image">
-                    <img class="post-image my-2" src="{{post.img_url}}" alt="" width="50%" style="border-radius: 10px;">
-                </div>
+                {% for post in blog_posts %}
+                    <div class="">
+                        <div class="">
+                            <div class="">
+                                {% if current_user.id == 1: %}
+                                <a href="{{url_for('delete_post', post_id=post.id) }}" class="button_delete" title="Delete post">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40px" class="ionicon" viewBox="0 0 512 512"><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col mx-5 my-2" style="background-color: rgba(0, 0, 0, 0.304); border-radius: 20px;">
+                            <div class="post-box">
+                                
+                                <div class="post-header justify-content-center my-1">
+                                    <h1 class="post-text-title">{{post.title}}</h1>
+                                    <h2 class="post-text-subtitle">{{post.subtitle}}</h2>
+                                    <h3 class="post-text-author">Author: {{post.author.name}}</h2>
+                                </div>
+                        
+                                <div class="post-body-image">
+                                    <img class="post-image my-2" src="{{post.img_url}}" alt="" width="50%" style="border-radius: 10px;">
+                                </div>
 
-                <div class="post-footer">
-                    <a href="{{ url_for('read_post', post_id=post.id) }}" class="button_read">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 262.62L256 342l80-79.38M256 330.97V170"/><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
-                        <p>
-                            Read & <br>comment
-                        </p>
-                    </a>
-                </div>
+                                <div class="post-footer">
+                                    <a href="{{ url_for('read_post', post_id=post.id) }}" class="button_read">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 262.62L256 342l80-79.38M256 330.97V170"/><path d="M256 64C150 64 64 150 64 256s86 192 192 192 192-86 192-192S362 64 256 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
+                                        <p>
+                                            Read & <br>comment
+                                        </p>
+                                    </a>
+                                </div>
 
-                <div class="post-footer">
-                    <h1 class="post-date">{{post.date}}</h1>
-                </div>
+                                <div class="post-footer">
+                                    <h1 class="post-date">{{post.date}}</h1>
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                
             </div>
         </div>
-        {% endfor %}
     </div>
 </body>
 </html>
