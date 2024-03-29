@@ -23,8 +23,8 @@ from form import AddProject, EditProject, RegisterForm, LoginForm, CreatePostFor
 
 app = Flask(__name__)
 #app.secret_key = "238JRjhgasdadasdask097kdKTTR5532948UJDZhhduzeůí9?"
-#app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")
+#app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b' # OFF for deploy
+app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")   #ON for deploy
 app.config["UPLOAD_PATH"] = "../static/images/project_images"
 ckeditor = CKEditor(app)
 Bootstrap5(app)
@@ -52,7 +52,8 @@ gravatar = Gravatar(app,
 # ---------- DATABASE CREATION -------------------------------------
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///personal-webpage.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///personal-webpage.db")  #ON
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///personal-webpage.db" # OFF for deploy
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 

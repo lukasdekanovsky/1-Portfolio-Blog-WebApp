@@ -2,3 +2,4 @@ venv
 ProjectBlog
 ProjectBackup v1.10
 instance
+__pycache__
