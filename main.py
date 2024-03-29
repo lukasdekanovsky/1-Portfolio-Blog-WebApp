@@ -53,7 +53,7 @@ class Base(DeclarativeBase):
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DB_URI", "sqlite:///personal-webpage.db")
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
-
+db.create_all()
 
 # ----------DATABASE TABLE CREATION ----------------------------------------
 class Project(db.Model):
