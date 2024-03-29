@@ -22,7 +22,9 @@ from form import AddProject, EditProject, RegisterForm, LoginForm, CreatePostFor
 
 
 app = Flask(__name__)
-app.secret_key = "238JRjhgasdadasdask097kdKTTR5532948UJDZhhduzeůí9?"
+#app.secret_key = "238JRjhgasdadasdask097kdKTTR5532948UJDZhhduzeůí9?"
+#app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get("FLASK_KEY")
 app.config["UPLOAD_PATH"] = "../static/images/project_images"
 ckeditor = CKEditor(app)
 Bootstrap5(app)
